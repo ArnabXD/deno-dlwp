@@ -14,7 +14,7 @@ export interface DownloadParams {
   /**
    * Callback to run on download start
    */
-  onStart?: () => void;
+  onStart?: () => void | Promise<void>;
   /**
    * Callback to run on download progress
    */
@@ -39,7 +39,7 @@ export interface DownloadParams {
        */
       path: string;
     },
-  ) => void;
+  ) => void | Promise<void>;
   /**
    * Time (ms) to trigger onProgress. Default `5000`
    */
@@ -47,7 +47,7 @@ export interface DownloadParams {
   /**
    * Callback to run on download complete
    */
-  onComplete?: () => void;
+  onComplete?: () => void | Promise<void>;
 }
 
 export async function download(
@@ -99,8 +99,8 @@ export async function download(
   });
 
   const timer = setInterval(
-    () =>
-      onProgress(
+    async () =>
+      await onProgress(
         {
           current: downloadedLength,
           total: totalLength,
@@ -113,7 +113,7 @@ export async function download(
     delay,
   );
 
-  onStart();
+  await onStart();
 
   while (true) {
     const { done, value } = await reader.read();
@@ -127,7 +127,7 @@ export async function download(
       if (file.rid) {
         Deno.close(file.rid);
       }
-      onComplete();
+      await onComplete();
       clearInterval(timer);
       break;
     }

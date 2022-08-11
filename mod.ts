@@ -47,7 +47,16 @@ export interface DownloadParams {
   /**
    * Callback to run on download complete
    */
-  onComplete?: () => void | Promise<void>;
+  onComplete?: (file: {
+    /**
+     * Downloading as name
+     */
+    fileName: string;
+    /**
+     * Downloading to path
+     */
+    path: string;
+  }) => void | Promise<void>;
 }
 
 export async function download(
@@ -127,7 +136,7 @@ export async function download(
       if (file.rid) {
         Deno.close(file.rid);
       }
-      await onComplete();
+      await onComplete({ fileName, path: _path });
       clearInterval(timer);
       break;
     }

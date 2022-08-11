@@ -2,7 +2,7 @@
 
 Download large files with progress
 
-# Documentation
+### Documentation
 
 ```ts
 async function download(
@@ -18,12 +18,22 @@ interface DownloadParams
     Directory to download the file
   overwrite?: boolean
     Overwrite or create new
-  onStart?: () => void
+  onStart?: () => void | Promise<void>
     Callback to run on download start
-  onProgress?: (progress: { current: number; total: number | "Unknown"; }, file: { fileName: string; path: string; }) => void
+  onProgress?: (progress: { current: number; total: number | "Unknown"; }, file: { fileName: string; path: string; }) => void | Promise<void>
     Callback to run on download progress
   delay?: number
     Time (ms) to trigger onProgress. Default `5000`
-  onComplete?: () => void
+  onComplete?: (file: { fileName: string; path: string; }) => void | Promise<void>
     Callback to run on download complete
+```
+
+### Example
+
+```ts
+import { download } from "https://deno.land/x/dlwp@v0.1.2/mod.ts";
+
+await download("https://speed.hetzner.de/100MB.bin", {
+  onComplete: ({ fileName }) => console.log("Downloaded : " + fileName),
+});
 ```

@@ -11,7 +11,27 @@ async function download(
 );
 ```
 
-```
+```text
+// Defined in /types.d.ts:12:0
+
+interface CallbackParamsFile
+
+  fileName: string
+    Downloading as name
+  path: string
+    Downloading to path
+
+// Defined in /types.d.ts:1:0
+
+interface CallbackParamsProgress
+
+  current: number
+    Current progress in bytes
+  total: number | "Unknown"
+    Total bytes to download
+
+// Defined in /types.d.ts:32:0
+
 interface DownloadParams
 
   dir?: string
@@ -20,12 +40,20 @@ interface DownloadParams
     Overwrite or create new
   onStart?: () => void | Promise<void>
     Callback to run on download start
-  onProgress?: (progress: { current: number; total: number | "Unknown"; }, file: { fileName: string; path: string; }) => void | Promise<void>
+  onProgress?: OnProgressCallback
     Callback to run on download progress
   delay?: number
     Time (ms) to trigger onProgress. Default `5000`
-  onComplete?: (file: { fileName: string; path: string; }) => void | Promise<void>
+  onComplete?: OnCompleteCallback
     Callback to run on download complete
+
+// Defined in /types.d.ts:28:0
+
+type OnCompleteCallback = (file: CallbackParamsFile) => void | Promise<void>
+
+// Defined in /types.d.ts:23:0
+
+type OnProgressCallback = (progress: CallbackParamsProgress, file: CallbackParamsFile) => void | Promise<void>
 ```
 
 ### Example

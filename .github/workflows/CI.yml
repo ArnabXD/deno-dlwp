@@ -1,0 +1,18 @@
+# https://github.com/roj1512/pls/blob/864d06bf3cc42c255743c6b959ee2be087119032/.github/workflows/ci.yml
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+      - run: deno fmt --check
+      - run: deno lint

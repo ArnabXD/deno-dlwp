@@ -2,62 +2,7 @@ import { writeAll } from "https://deno.land/std@0.151.0/streams/conversion.ts";
 import { join, parse } from "https://deno.land/std@0.151.0/path/mod.ts";
 import { crypto } from "https://deno.land/std@0.151.0/crypto/mod.ts";
 
-export interface DownloadParams {
-  /**
-   * Directory to download the file
-   */
-  dir?: string;
-  /**
-   * Overwrite or create new
-   */
-  overwrite?: boolean;
-  /**
-   * Callback to run on download start
-   */
-  onStart?: () => void | Promise<void>;
-  /**
-   * Callback to run on download progress
-   */
-  onProgress?: (
-    progress: {
-      /**
-       * Current progress in bytes
-       */
-      current: number;
-      /**
-       * Total bytes to download
-       */
-      total: number | "Unknown";
-    },
-    file: {
-      /**
-       * Downloading as name
-       */
-      fileName: string;
-      /**
-       * Downloading to path
-       */
-      path: string;
-    },
-  ) => void | Promise<void>;
-  /**
-   * Time (ms) to trigger onProgress. Default `5000`
-   */
-  delay?: number;
-  /**
-   * Callback to run on download complete
-   */
-  onComplete?: (file: {
-    /**
-     * Downloading as name
-     */
-    fileName: string;
-    /**
-     * Downloading to path
-     */
-    path: string;
-  }) => void | Promise<void>;
-}
+import { DownloadParams } from "./types.d.ts";
 
 export async function download(
   /**
@@ -142,3 +87,5 @@ export async function download(
     }
   }
 }
+
+export * from "./types.d.ts";

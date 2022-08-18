@@ -59,9 +59,9 @@ type OnProgressCallback = (progress: CallbackParamsProgress, file: CallbackParam
 ### Example
 
 ```ts
-import { download } from "https://deno.land/x/dlwp@v0.1.2/mod.ts";
+import { download } from "https://deno.land/x/dlwp@v0.1.3/mod.ts";
 
-await download("https://speed.hetzner.de/100MB.bin", {
+await download("https://speed.hetzner.de/10GB.bin", {
   onComplete: ({ fileName }) => console.log("Downloaded : " + fileName),
 });
 ```

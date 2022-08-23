@@ -7,6 +7,8 @@ export interface CallbackParamsProgress {
    * Total bytes to download
    */
   total: number | "Unknown";
+  /** Average speed over las 5 secs */
+  speed: number;
 }
 
 export interface CallbackParamsFile {
@@ -63,24 +65,16 @@ export interface DownloadParams {
 export interface DownloadStatus {
   /** Unique id */
   uid: string;
-  /**
-   * Download started on
-   */
+  /** Download started on */
   startTime: number;
-  /**
-   * Current download progress
-   */
+  /** Current download progress */
   currentProgress: number;
-  /**
-   * Total buffer size to be downloaded
-   */
+  /** Total buffer size to be downloaded */
   totalLength: number | "Unknown";
-  /**
-   * Time distance from startTime to now in words
-   */
+  /** Time distance from startTime to now in words */
   timeDistanceInWords: string;
-  /**
-   * Is it downloading
-   */
+  /** Is it downloading */
   isDownloading: boolean;
+  /** Average speed over last 5 secs */
+  speed: number;
 }

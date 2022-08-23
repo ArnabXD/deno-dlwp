@@ -54,4 +54,33 @@ export interface DownloadParams {
    * Callback to run on download complete
    */
   onComplete?: OnCompleteCallback;
+  /**
+   * Callback to run on Cancel
+   */
+  onCancel?: () => void | Promise<void>;
+}
+
+export interface DownloadStatus {
+  /** Unique id */
+  uid: string;
+  /**
+   * Download started on
+   */
+  startTime: number;
+  /**
+   * Current download progress
+   */
+  currentProgress: number;
+  /**
+   * Total buffer size to be downloaded
+   */
+  totalLength: number | "Unknown";
+  /**
+   * Time distance from startTime to now in words
+   */
+  timeDistanceInWords: string;
+  /**
+   * Is it downloading
+   */
+  isDownloading: boolean;
 }

@@ -13,6 +13,7 @@ export class DLWP {
   private _totalLength: number | "Unknown";
   private _file: Deno.FsFile;
 
+  /** Ignore */
   constructor() {
     this._uid = crypto.randomUUID().split("-").pop()!;
     this._startTime = Date.now();

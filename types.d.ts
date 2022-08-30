@@ -1,64 +1,44 @@
 export interface CallbackParamsProgress {
-  /**
-   * Current progress in bytes
-   */
+  /** Current progress in bytes */
   current: number;
-  /**
-   * Total bytes to download
-   */
+  /** Total bytes to download */
   total: number | "Unknown";
   /** Average speed over las 5 secs */
   speed: number;
 }
 
 export interface CallbackParamsFile {
-  /**
-   * Downloading as name
-   */
+  /** Downloading as name */
   fileName: string;
-  /**
-   * Downloading to path
-   */
+  /** Downloading to path */
   path: string;
 }
 
+/** Progress callback */
 export type OnProgressCallback = (
   progress: CallbackParamsProgress,
   file: CallbackParamsFile,
 ) => void | Promise<void>;
 
+/** Download complete callback */
 export type OnCompleteCallback = (
   file: CallbackParamsFile,
 ) => void | Promise<void>;
 
 export interface DownloadParams {
-  /**
-   * Directory to download the file
-   */
+  /** Directory to download the file */
   dir?: string;
-  /**
-   * Overwrite or create new
-   */
+  /** Overwrite or create new */
   overwrite?: boolean;
-  /**
-   * Callback to run on download start
-   */
+  /** Callback to run on download start */
   onStart?: () => void | Promise<void>;
-  /**
-   * Callback to run on download progress
-   */
+  /** Callback to run on download progress */
   onProgress?: OnProgressCallback;
-  /**
-   * Time (ms) to trigger onProgress. Default `5000`
-   */
+  /** Time (ms) to trigger onProgress. Default `5000` */
   delay?: number;
-  /**
-   * Callback to run on download complete
-   */
+  /** Callback to run on download complete */
   onComplete?: OnCompleteCallback;
-  /**
-   * Callback to run on Cancel
-   */
+  /** Callback to run on Cancel */
   onCancel?: () => void | Promise<void>;
 }
 

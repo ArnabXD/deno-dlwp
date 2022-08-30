@@ -43,7 +43,7 @@ export class DLWP {
     return this._uid;
   }
 
-  /** Cleanup function when  */
+  /** Cleanup function */
   private async _cleanup(deleteFile = true) {
     if (this._file.rid) {
       Deno.close(this._file.rid);

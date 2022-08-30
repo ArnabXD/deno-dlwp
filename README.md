@@ -5,7 +5,7 @@ Download large files with progress
 ### Example
 
 ```ts
-import { DLWP } from "https://deno.land/x/dlwp@v0.2.0/mod.ts";
+import { DLWP } from "https://deno.land/x/dlwp@v0.2.2/mod.ts";
 
 const dlwp = new DLWP();
 dlwp.download("https://speed.hetzner.de/1GB.bin", {
